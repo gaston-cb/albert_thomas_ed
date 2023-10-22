@@ -12,7 +12,7 @@ void clean_buffer(uint8_t *buffer_clean, size_t len_buffer ){
 
 volatile uint8_t flag_isr_twi_av[10] ;  ; 
 volatile uint8_t track_twcr[10] ;  ; 
-const uint8_t send_master_data = 33 ;  
+const uint8_t send_master_data = 33 ; //"adc:      \r\n"
 volatile const char message_i2c[14] = "HOLA MUNDO\r\n" ; 
 volatile uint8_t size_message = 0 ; 
 
@@ -33,7 +33,7 @@ void setup() {
   sei() ; ///enable globar irq (macro microchip)
   Serial.print("I2C SLAVE INIT: slave ADDR ") ; 
   Serial.print(TWAR,HEX) ; 
-
+  
 }
 
   volatile uint8_t status ;
@@ -47,8 +47,10 @@ void loop() {
     status = 0x00 ; 
 
   }
-  
- 
+  delay(1000); 
+  snprintf(message_i2c,(size_t) 14, "adc: %d \r\n",analogRead(A0)) ;  
+  Serial.println((char *)message_i2c); 
+
 }
 
 

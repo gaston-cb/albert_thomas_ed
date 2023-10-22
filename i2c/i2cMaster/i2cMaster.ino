@@ -113,8 +113,8 @@ void master_receive_test(){
   TWCR = (1<<TWINT)| (1<<TWSTO) | (1<<TWEN) ; //send stop
 
 // for (int i = 0 ; i<14; i++){
-    Serial.print(data_arrived) ; 
-  //}  
+  Serial.print((char *)data_arrived) ; 
+  
   Serial.println()  ;
   
 }
